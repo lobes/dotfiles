@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+function gccd() {
+    IFS='/' read -r user repo <<< "$1"
+    cd ~/code
+    git clone git@github.com:$user/$repo
+    cd $repo
+}

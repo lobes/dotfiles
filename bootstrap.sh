@@ -1,10 +1,29 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")"
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+cd "$(dirname "${ZSH_SOURCE}")"
 
 function init() {
-    
+    return
 }
+
 # Create symlinks
-ln -s ${PWD}/.zshrc ~/.zshrc
-ln -s ${PWD}/.gitconfig ~/.gitconfig
+files=(
+    .zshrc 
+    .gitconfig 
+    .functions 
+    .aliases
+    .keybinds
+)
+
+for file in "${files[@]}"; do
+    if [ ! -L ~/$file ]; then
+        if [ -e ~/$file ]; then
+            mv ~/$file ~/${file}_old
+        fi
+        ln -s ${PWD}/$file ~/$file
+    fi
+done
