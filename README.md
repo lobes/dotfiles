@@ -1,7 +1,15 @@
 # dotfiles
 What it says on the tin
 
-`curl --proto '=https' --tlsv1.2 -sSf -L https://raw.githubusercontent.com/lobes/dotfiles/base/pewpew.sh | sh -s`
+```
+curl --proto \
+  '=https' \
+  --tlsv1.2 \
+  -sSf \
+  -L \
+  https://raw.githubusercontent.com/lobes/dotfiles/base/pewpew.sh \
+  | sh -s
+```
 
 ## todo:
 
