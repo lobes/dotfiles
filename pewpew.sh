@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-init
-
 function init() {
     # Install Determinate.Systems nix (check idempotency):
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
