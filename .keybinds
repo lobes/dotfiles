@@ -1,3 +1,0 @@
-# UP and DOWN to search history containing current input
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
