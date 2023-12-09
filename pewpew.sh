@@ -10,19 +10,38 @@ function init() {
         exit 1
     fi
 
-    # Create a list of strings from the following:
-    local packages=("git" "warp-terminal --impure" "helix" "yt-dlp" "ripgrep-all" "htop" "tree" "bat")
+    # The goods: #[cmd]
+    local packages=(
+        "git" #git
+        "warp-terminal --impure" 
+        "helix" #hx
+        "yt-dlp" #yt-dlp
+        "ripgrep-all" #rga
+        "htop" #htop
+        "tree" #tree
+        "bat" #bat
+        "nix-direnv" #direnv
+        )
     installPackages "${packages[@]}"
+    # todo: --add justfile | obsidian
 
-    # Remove nix config
-    # (Assuming removal of a specific nix configuration file)
+    # Add nix-direnv to direnvrc
+    source $HOME/.nix-profile/share/nix-direnv/direnvrc
+
+    # Remove nix config because we use the one in the repo
     rm -f ~/.config/nix/nix.conf
 
     # Clone dotfiles repo
     git clone https://github.com/lobes/dotfiles.git $HOME/code/dotfiles
 
     # Create a list of strings from the following: 
-    local dotfiles=(.bashrc .variables .aliases .functions)
+    # todo: --add direnvrc | gitconfig | helix/config.toml
+    local dotfiles=(
+        ".bashrc" 
+        ".variables" 
+        ".aliases" 
+        ".functions"
+        )
     sync "${dotfiles[@]}"
 
     # Make bash default shell
@@ -60,4 +79,4 @@ function sync() {
     done
 }
 
-init
+init || exit 1
