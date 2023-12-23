@@ -43,6 +43,8 @@ function init() {
     "helix"
     "just"
     ## CLI QOL ##
+    "alacritty"
+    "tmux"
     "ripgrep" # grep replacement
     "htop"
     "bat" # cat replacement
