@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # -- variables -- #
-REPO_ROOT=~/code
+REPO_ROOT=~/code/
 
 # -- functions -- #
 
@@ -29,11 +29,11 @@ function syncDotfiles() {
   dest=""
 
   if [[ "$direction" == "in" ]]; then
-    src="${REPO_ROOT}/dotfiles/"
+    src="${REPO_ROOT}dotfiles/"
     dest="~/"
   elif [[ "$direction" == "out" ]]; then
     src="~/"
-    dest="${REPO_ROOT}/dotfiles/"
+    dest="${REPO_ROOT}dotfiles/"
   else
     echo "Invalid direction. Use 'in' or 'out'."
     return 1
@@ -43,14 +43,11 @@ function syncDotfiles() {
   ARCHIVE=mktemp -d
 
   # Perform a dry run to identify files that would be overwritten
-  # todo: use --include instead of --exclude
   rsync --dry-run --delete \
-    --exclude ".git/" \
-    --exclude ".DS_Store" \
-    --exclude ".macOS" \
-    --exclude "bootstrap.sh" \
-    --exclude "README.md" \
-    --exclude "LICENSE" \
+    --include ".config/alacritty/alacritty.yml" \
+    --include ".config/helix/config.toml" \
+    --include ".config/nix/nix.conf" \
+    --include ".gitconfig" \
     -avh --no-perms $src $dest | grep 'deleting' | awk '{print $2}' >delete_list.txt
 
   # Move files that would be overwritten to the archive directory
@@ -60,12 +57,10 @@ function syncDotfiles() {
 
   # Perform actual sync
   rsync \
-    --exclude ".git/" \
-    --exclude ".DS_Store" \
-    --exclude ".macOS" \
-    --exclude "bootstrap.sh" \
-    --exclude "README.md" \
-    --exclude "LICENSE" \
+    --include ".config/alacritty/alacritty.yml" \
+    --include ".config/helix/config.toml" \
+    --include ".config/nix/nix.conf" \
+    --include ".gitconfig" \
     -avh --no-perms $src $dest
 
   # Clean up
