@@ -145,8 +145,8 @@
         MaloBookPro = makeOverridable self.lib.mkDarwinSystem (primaryUserDefaults // {
           modules = attrValues self.darwinModules ++ singleton {
             nixpkgs = nixpkgsDefaults;
-            networking.computerName = "Malo’s 💻";
-            networking.hostName = "MaloBookPro";
+            networking.computerName = "Jambo";
+            networking.hostName = "Jambo";
             networking.knownNetworkServices = [
               "Wi-Fi"
               "USB 10/100/1000 LAN"
@@ -165,17 +165,6 @@
           homeModules = attrValues self.homeManagerModules;
         });
 
-        # Config with small modifications needed/desired for CI with GitHub workflow
-        githubCI = self.darwinConfigurations.MaloBookPro.override {
-          system = "x86_64-darwin";
-          username = "runner";
-          nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
-          extraModules = singleton {
-            environment.etc.shells.enable = mkForce false;
-            environment.etc."nix/nix.conf".enable = mkForce false;
-            homebrew.enable = mkForce false;
-          };
-        };
       };
 
       # Config I use with non-NixOS Linux systems (e.g., cloud VMs etc.)
@@ -193,14 +182,6 @@
         });
       };
 
-      # Config with small modifications needed/desired for CI with GitHub workflow
-      homeConfigurations.runner = self.homeConfigurations.malo.override (old: {
-        modules = old.modules ++ singleton {
-          home.username = mkForce "runner";
-          home.homeDirectory = mkForce "/home/runner";
-          home.user-info.nixConfigDirectory = mkForce "/home/runner/work/nixpkgs/nixpkgs";
-        };
-      });
       # }}}
 
     } // flake-utils.lib.eachDefaultSystem (system: {
