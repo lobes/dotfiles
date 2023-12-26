@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[YO]  :: Gimmie the Cashhhhh!"
+sudo -v
+
+# hold-girdle.gif
+while ((counter > 0)); do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
+
+echo "[SUP] :: TURN AND BURN!!!"
+if [ ! -d "/nix" ]; then
+    source ./nix-get
+    # else
+    # Add check for -u as flag before doing this
+
+    # source ./nix-kill
+fi

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[SUP] :: Uninstalling Nix..."
+
+/nix/nix-installer uninstall
+
+echo "[SUP] :: Done Uninstalling Nix..."
