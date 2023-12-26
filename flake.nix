@@ -208,22 +208,5 @@
       # This is handy in combination with setting `nix.registry.my.flake = inputs.self`.
       # Allows doing things like `nix run my#prefmanager -- watch --all`
       legacyPackages = import inputs.nixpkgs-unstable (nixpkgsDefaults // { inherit system; });
-
-      # Development shells ----------------------------------------------------------------------{{{
-      # Shell environments for development
-      # With `nix.registry.my.flake = inputs.self`, development shells can be created by running,
-      # e.g., `nix develop my#python`.
-      devShells = let pkgs = self.legacyPackages.${system}; in
-        {
-          python = pkgs.mkShell {
-            name = "python310";
-            inputsFrom = attrValues {
-              inherit (pkgs.pkgs-master.python310Packages) black isort;
-              inherit (pkgs) poetry python310 pyright;
-            };
-          };
-        };
-      # }}}
     });
 }
-# vim: foldmethod=marker
