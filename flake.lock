@@ -20,28 +20,6 @@
         "type": "github"
       }
     },
-    "devshell": {
-      "inputs": {
-        "nixpkgs": [
-          "prefmanager",
-          "nixpkgs"
-        ],
-        "systems": "systems_2"
-      },
-      "locked": {
-        "lastModified": 1701787589,
-        "narHash": "sha256-ce+oQR4Zq9VOsLoh9bZT8Ip9PaMLcjjBUHVPzW5d7Cw=",
-        "owner": "numtide",
-        "repo": "devshell",
-        "rev": "44ddedcbcfc2d52a76b64fb6122f209881bd3e1e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "devshell",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -163,7 +141,6 @@
     },
     "prefmanager": {
       "inputs": {
-        "devshell": "devshell",
         "flake-compat": [
           "flake-compat"
         ],
